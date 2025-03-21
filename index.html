@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: "Winky Sans";
+        }
+
+        .heading {
+            font-size: 3rem;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .dad-container {
+            margin-top: 50px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .service-h1 {
+            margin: 0;
+            margin-top: 10px;
+        }
+
+        #input1, #input2 {
+            width: 51%;
+            height: 25px;
+            font-size: large;
+        }
+
+        #input2 {
+            width: 40%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .good, .bad, .average {
+            height: 80px;
+            width: 80px;
+            font-size: 1.25rem;
+            border: 2px solid black;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .good {
+            background-color: lightgreen;
+        }
+
+        .average {
+            background-color: orange;
+        }
+
+        .bad {
+            background-color: red;
+        }
+
+        .select::after {
+            content: "Selected";
+            position: absolute;
+            color: green;
+            width: 100%;
+            height: 100%;
+            top: 20%;
+            left: 50%;
+            translate: -50% -50%;
+            border-radius: 10px;
+        }
+
+        .button-div {
+            display: flex;
+            gap: 30px;
+        }
+
+        .calculate {
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid black;
+            background-color: pink;
+            color: color-mix(in srgb, purple 40%, pink 60%);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 450px) {
+            body {
+                margin: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="heading">Tip Calculator</h1>
+    <h1 class="heading display">
+        
+    </h1>
+
+    <div class="dad-container">
+        <div class="input-div">
+            <input type="number" id="input1" placeholder="What is the bill amount">
+            <input type="number" id="input2" placeholder="Number of people">
+        </div>
+        
+        <div class="container">
+            <h1 class="service-h1">
+                    How was the service?
+            </h1>
+    
+            <div class="button-div">
+                <button class="bad" onclick="bad()">
+                    Bad
+                </button>
+        
+                <button class="average" onclick="average()">
+                    Average
+                </button>
+        
+                <button class="good" onclick="good()">
+                    Good
+                </button>
+            </div>
+
+            <button class="calculate" onclick="calculate()">
+                Calculate
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        This website is the creation of <a href="https://github.com/divaspant-dev/">Divas Pant</a>
+    </footer>
+
+
+    <script>
+
+        const badd = document.querySelector(".bad");
+        const averagee = document.querySelector(".average");
+        const goodd = document.querySelector(".good");
+        const calc = document.querySelector(".calculate");
+
+        function bad() {
+            averagee.classList.remove("select");
+            goodd.classList.remove("select");
+            badd.classList.toggle("select");
+        }
+
+        function average() {
+            averagee.classList.toggle("select");
+            goodd.classList.remove("select");
+            badd.classList.remove("select");
+        }
+
+        function good() {
+            averagee.classList.remove("select");
+            goodd.classList.toggle("select");
+            badd.classList.remove("select");
+        }
+
+
+        function calculate() {
+            const input1 = document.getElementById("input1");
+            const input2 = document.getElementById("input2");
+            const input1F = parseFloat(input1.value);
+            const input2F = parseFloat(input2.value);
+            const display = document.querySelector(".display");
+            const selected = document.querySelector(".select");
+
+            // By copilot start from here
+
+
+            // end here
+            if (isNaN(input1F) && isNaN(input2F) && !badd.classList.contains("select") && 
+            !averagee.classList.contains("select") && 
+            !goodd.classList.contains("select")) {
+                display.innerHTML = "Please fill up everything";
+                display.style.color = "red";
+            }
+
+            else if (isNaN(input1F) && isNaN(input2F)) {
+                display.innerHTML = "Please Fill up the remaining boxes";
+                display.style.color = "red";
+                badd.classList.remove("select");
+                averagee.classList.remove("select");
+                goodd.classList.remove("select");
+            } else if (isNaN(input1F)) {
+                display.innerHTML = "Please fill up bill amount";
+                display.style.color = "red";
+                input2.value = "";
+                badd.classList.remove("select");
+                averagee.classList.remove("select");
+                goodd.classList.remove("select");
+            }
+
+            else if (isNaN(input2F)) {
+                display.innerHTML = "Please fill up number of people. Even if its 1";
+                display.style.color = "red";
+                input1.value = "";
+                badd.classList.remove("select");
+                averagee.classList.remove("select");
+                goodd.classList.remove("select");
+            }
+            
+            //Copilot code
+
+            else if (!badd.classList.contains("select") && 
+            !averagee.classList.contains("select") && 
+            !goodd.classList.contains("select")) {
+                display.innerHTML = "Please select a service (Bad, Average, Good)";
+                display.style.color = "red";
+                input1.value = "";
+                input2.value = "";
+                return;
+            }
+
+            //Till here
+            
+            else {
+                if (selected.innerHTML.trim() === "Bad") {
+                    let percentage = input1F * 0.005; 
+                    let result = percentage / input2F; 
+                    display.style.color = "green";
+
+                    if (input2.value == 1) {
+                        display.innerHTML = `You should tip the waiter ${result.toFixed(2)}`;
+                        input1.value = "";
+                        input2.value = "";
+                        badd.classList.remove("select");
+                        averagee.classList.remove("select");
+                        goodd.classList.remove("select");
+                    } else {
+                        display.innerHTML = `Each person should tip the waiter ${result.toFixed(2)}`;
+                        input1.value = "";
+                        input2.value = "";
+                        badd.classList.remove("select");
+                        averagee.classList.remove("select");
+                        goodd.classList.remove("select");
+                    }
+                } else if (selected.innerHTML.trim() === "Average") {
+                    let percentage = input1F * 0.01; 
+                    let result = percentage / input2F; 
+                    display.style.color = "green";
+
+                    if (input2.value == 1) {
+                        display.innerHTML = `You should tip the waiter ${result.toFixed(2)}`;
+                        input1.value = "";
+                        input2.value = "";
+                        badd.classList.remove("select");
+                        averagee.classList.remove("select");
+                        goodd.classList.remove("select");
+                    } else {
+                        display.innerHTML = `Each person should tip the waiter ${result.toFixed(2)}`;
+                        input1.value = "";
+                        input2.value = "";
+                        badd.classList.remove("select");
+                        averagee.classList.remove("select");
+                        goodd.classList.remove("select");
+                    }
+                } else if (selected.innerHTML.trim() === "Good") {
+                    let percentage = input1F * 0.03; 
+                    let result = percentage / input2F; 
+                    display.style.color = "green";
+
+                    if (input2.value == 1) {
+                        display.innerHTML = `You should tip the waiter ${result.toFixed(2)}`;
+                        input1.value = "";
+                        input2.value = "";
+                        badd.classList.remove("select");
+                        averagee.classList.remove("select");
+                        goodd.classList.remove("select");
+                    } else {
+                        display.innerHTML = `Each person should tip the waiter ${result.toFixed(2)}`;
+                        input1.value = "";
+                        input2.value = "";
+                        badd.classList.remove("select");
+                        averagee.classList.remove("select");
+                        goodd.classList.remove("select");
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
